@@ -32,6 +32,8 @@ const ProductDetails: React.FC = () => {
   const [attributes, setAttributes] = useState<ProductAttribute[] | null>(null);
   const [productData, setProductData] = useState<Product | null>(null);
 
+  console.log(attributes);
+  
   const { id } = useParams();
   const { state, dispatch } = useStateValue();
     const { products, cart } = state;

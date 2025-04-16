@@ -1,7 +1,7 @@
 import React from 'react';
 import navImage from '../data/refresh.png';
 import { BsCart2 } from 'react-icons/bs';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Cart from './Cart';
 import { TOGGLE_CART } from '../constants/constants';
 import { useStateValue } from '../context/StateProvider';

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { BsCart2 } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
 import { useStateValue } from '../context/StateProvider'; // Assuming you're using useContext for global state
@@ -35,7 +35,6 @@ interface Product {
   
 
 const HomePage: React.FC = () => {
-  const [productsData, setProductsData] = useState<any>(null);
   const { state, dispatch } = useStateValue(); // Accessing global state and dispatch via context
   const navigate = useNavigate();
 

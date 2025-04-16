@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { useStateValue } from '../context/StateProvider';
 import { EMPTY_CART, REMOVE_FROM_CART, UPDATE_CART_ITEM } from '../constants/constants';
 import { useMutation } from '@apollo/client';
 import { createOrderMutation } from '../api/graphqlQueries';
 import { toKebabCase } from '../utils/utils';
-import { it } from 'node:test';
 
 interface Product {
   id: string;
