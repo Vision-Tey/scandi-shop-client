@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 
-const baseURL = "http://0.0.0.0:8000/public/graphql";
+const baseURL = "https://bbf9-41-210-155-166.ngrok-free.app/public/graphql";
 
 // Type definition for the response data
 interface GraphQLResponse<T> {
