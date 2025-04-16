@@ -1,0 +1,16 @@
+.active {
+    color: rgb(45, 190, 45);
+  }
+  
+  .out-of-stock {
+    filter: grayscale(100%);
+    opacity: 0.2;
+  }
+  
+  .disabled {
+    background-color: #d3d3d3; 
+    color: #a9a9a9;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+  

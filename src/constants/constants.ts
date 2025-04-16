@@ -1,0 +1,10 @@
+export const SET_USER = 'SET_USER' as const;
+export const SUBMIT_ORDER = 'SUBMIT_ORDER' as const;
+export const ADD_TO_CART = 'ADD_TO_CART' as const;
+export const REMOVE_FROM_CART = 'REMOVE_FROM_CART' as const;
+export const EMPTY_CART = 'EMPTY_CART' as const;
+export const UPDATE_CART_ITEM = 'UPDATE_CART_ITEM' as const;
+export const TOGGLE_CART = 'TOGGLE_CART' as const;
+export const SET_PRODUCTS = 'SET_PRODUCTS' as const;
+export const SET_CATEGORIES = 'SET_CATEGORIES' as const;
+export const SET_ACTIVE_CATEGORY = 'SET_ACTIVE_CATEGORY' as const;
