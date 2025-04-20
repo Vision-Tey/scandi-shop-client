@@ -143,20 +143,20 @@ const { state: { cart }, dispatch } = useStateValue();
                 <span data-testid="cart-item-amount">${product.price}</span>
                 {(product.attributes as Attribute[]) ?.map(attr => (
                   <div key={attr.id}>
-                    <h3>{attr.name}</h3>
+                    <h3>{attr.name}:</h3>
                     <div className="flex attribute-items">
                       {attr.items.map(item =>
                         attr.name === 'Color' ? (
                           <button
                             key={item.id}
-                            className={`mr-1 p-2 border-2 ${handleSelected(item.value, product) ? 'h-6 w-12' : 'h-4 w-10'}`}
+                            className={`mr-1 p-2 h-4 w-10 ${handleSelected(item.value, product) ? 'border-3 border-green-500' : ''}`}
                             style={{ backgroundColor: item.value }}
                             data-testid={`cart-item-attribute-${toKebabCase(attr.name)}-${item.value}${handleSelected(item.value, product) ? '-selected' : ''}`}
                           />
                         ) : (
                           <button
                             key={item.id}
-                            className={`h-8 w-10 mr-2 p-2 border-2 text-xs ${handleSelected(item.value, product) ? 'bg-black text-white' : 'bg-white text-black'}`}
+                            className={`h-5 w-7 mr-2 p-0 border-2 text-[10px] ${handleSelected(item.value, product) ? 'bg-black text-white' : 'bg-white text-black'}`}
                             data-testid={`product-attribute-${toKebabCase(attr.name)}-${item.value}${handleSelected(item.value, product) ? '-selected' : ''}`}
                           >
                             {item.value}
@@ -169,9 +169,9 @@ const { state: { cart }, dispatch } = useStateValue();
               </div>
 
               <div className="flex flex-col justify-between h-full items-center">
-                <button onClick={() => incrementQuantity(product.id, product.size, product.color)} className="text-xl font-bold border-black border-2 h-8 px-2" data-testid="cart-item-amount-increase">+</button>
+                <button onClick={() => incrementQuantity(product.id, product.size, product.color)} className="text-xl font-bold border-black border-2 h-8 px-2 cursor-pointer" data-testid="cart-item-amount-increase">+</button>
                 <span className="my-auto" data-testid="cart-item-amount">{product.quantity}</span>
-                <button onClick={() => decrementQuantity(product.id, product.size, product.color)} className="text-xl font-bold border-black border-2 h-8 px-2" data-testid="cart-item-amount-decrease">-</button>
+                <button onClick={() => decrementQuantity(product.id, product.size, product.color)} className="text-xl font-bold border-black border-2 h-8 px-2 cursor-pointer" data-testid="cart-item-amount-decrease">-</button>
               </div>
 
               <img src={product.image} alt={product.name} className="w-20 h-20 object-cover" />
@@ -185,14 +185,14 @@ const { state: { cart }, dispatch } = useStateValue();
         <span className="total-amount">${totalPrice.toFixed(2)}</span>
       </div>
 
-      <button onClick={() => setShowOrderForm(!showOrderForm)} className={`w-full bg-green-400 text-white py-2 rounded ${cart.length < 1 ? 'disabled' : ''}`}>Order</button>
+      <button onClick={() => setShowOrderForm(!showOrderForm)} className={`w-full bg-green-400 text-white py-2 rounded ${cart.length < 1 ? 'disabled' : ''} cursor-pointer`}>Order</button>
 
       {showOrderForm && (
         <form onSubmit={handleSubmit} className="mt-4">
           <input type="text" name="customerName" placeholder="Customer Name" value={customerName} onChange={e => setCustomerName(e.target.value)} className="mb-2 p-2 border" required />
           <input type="email" name="customerEmail" placeholder="Customer Email" value={customerEmail} onChange={e => setCustomerEmail(e.target.value)} className="mb-2 p-2 border" required />
           <input type="text" name="customerAddress" placeholder="Customer Address" value={customerAddress} onChange={e => setCustomerAddress(e.target.value)} className="mb-2 p-2 border" required />
-          <button type="submit" className="w-full bg-green-400 text-white py-2 rounded">Submit Order</button>
+          <button type="submit" className="w-full bg-green-400 text-white py-2 rounded cursor-pointer">Submit Order</button>
         </form>
       )}
     </div>

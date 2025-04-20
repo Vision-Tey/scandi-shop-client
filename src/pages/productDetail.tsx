@@ -224,7 +224,7 @@ const ProductDetails: React.FC = () => {
                             key={item.id}
                             data-testid={`product-attribute-${toKebabCase(attribute.name)}-${item.value}${handleSelected(item.value) ? "-selected" : ""}`}
                             onClick={() => handleSizeClick(attribute.name, item.value)}
-                            className={`mr-2 p-2 border-2 ${handleSelected(item.value) ? 'bg-black text-white h-8 w-10' : 'bg-white text-black h-10 w-16'}`}
+                            className={`mr-2 p-2 border-2 ${handleSelected(item.value) ? 'bg-black text-white h-8 w-10' : 'bg-white text-black h-10 w-16'} cursor-pointer`}
                             style={attribute.name === 'Color' ? { backgroundColor: item.value } : {}}
                           >
                             {attribute.name !== 'Color' && item.value}
@@ -243,7 +243,7 @@ const ProductDetails: React.FC = () => {
               <div className="mt-6">
                 <button
                   onClick={addToCart}
-                  className={`w-full py-2 rounded ${productData.inStock ? 'bg-green-400 text-white' : 'disabled'}`}
+                  className={`w-full py-2 rounded ${productData.inStock ? 'bg-green-400 text-white' : 'disabled'} cursor-pointer`}
                   disabled={!productData.inStock}
                   data-testid="add-to-cart"
                 >

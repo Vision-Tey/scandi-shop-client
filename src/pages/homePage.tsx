@@ -200,7 +200,7 @@ const HomePage: React.FC = () => {
                   }
                   className="bg-green-600 rounded-full h-8 w-8"
                 >
-                  <BsCart2 className="text-white m-2" />
+                  <BsCart2 className="text-white m-2 cursor-pointer" />
                 </button>
               </div>
             )}
