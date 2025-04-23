@@ -154,6 +154,8 @@ const ProductDetails: React.FC = () => {
       return false;
     });
 
+    // Check if the product is already in the cart
+    // If it is, update the quantity
     if (item) {
       dispatch({
         type: UPDATE_CART_ITEM,
@@ -167,6 +169,7 @@ const ProductDetails: React.FC = () => {
         quantity: item.quantity + 1,
       });
     } else {
+      // If it is not, add it to the cart
       dispatch({
         type: ADD_TO_CART,
         id: productData.id,

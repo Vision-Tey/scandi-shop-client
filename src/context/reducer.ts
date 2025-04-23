@@ -33,7 +33,6 @@ import {
     id: string;
     name: string;
     price: number;
-    // Add other product properties as needed
   }
   
   export interface Category {
@@ -43,14 +42,13 @@ import {
   export interface User {
     id: string;
     name: string;
-    // Add more user fields as necessary
+
   }
   
   export interface Order {
     id: string;
     products: CartItem[];
     total: number;
-    // Add other order details as needed
   }
   
   export interface State {

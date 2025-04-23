@@ -32,7 +32,7 @@ const App: React.FC = () => {
   );
 };
 
-
+// This component is used to wrap the HomePage component and set the active category in the global state
 const CategoryRouteWrapper: React.FC = () => {
   const { category } = useParams<{ category: string }>();
   const { dispatch } = useStateValue();

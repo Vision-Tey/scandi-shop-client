@@ -41,23 +41,20 @@ export type Action =
   | { type: "EMPTY_CART" }
   | { type: "SET_ACTIVE_CATEGORY"; active: string };
 
-// Context value type
 interface StateContextType {
   state: State;
   dispatch: Dispatch<Action>;
 }
 
-// ✅ Context declaration
 export const StateContext = createContext<StateContextType | undefined>(undefined);
 
-// Props for provider
 interface StateProviderProps {
   reducer: (state: State, action: Action) => State;
   initialState: State;
   children: ReactNode;
 }
 
-// ✅ Provider component
+// Provider component
 export const StateProvider = ({ reducer, initialState, children }: StateProviderProps) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -68,7 +65,7 @@ export const StateProvider = ({ reducer, initialState, children }: StateProvider
   );
 };
 
-// ✅ Hook to use context
+// Hook to use context
 export const useStateValue = (): StateContextType => {
   const context = useContext(StateContext);
   if (!context) {

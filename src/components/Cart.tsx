@@ -44,8 +44,7 @@ const { state: { cart }, dispatch } = useStateValue();
   const incrementQuantity = (id: string, size?: string | null, color?: string | null) => {
     const item = cart.find(i => i.id === id && i.size === size && i.color === color);
     if (item) {
-      console.log(item);
-      
+      // If the item exists in the cart, update its quantity      
       dispatch({
         type: UPDATE_CART_ITEM,
         id: item?.id,
@@ -62,6 +61,7 @@ const { state: { cart }, dispatch } = useStateValue();
     const decrementQuantity = (id: string, size?: string | null, color?: string | null) => {
         const item = cart.find(i => i.id === id && i.size === size && i.color === color);
         if (item && item.quantity > 1) {
+        // If the item exists in the cart and quantity is greater than 1, update its quantity
         dispatch({
             type: UPDATE_CART_ITEM,
             id: item?.id,
@@ -74,6 +74,7 @@ const { state: { cart }, dispatch } = useStateValue();
             quantity: item?.quantity - 1,
         });
         } else {
+        // If the quantity is 1, remove the item from the cart
         dispatch({ type: REMOVE_FROM_CART, id: item?.id });
         }
     };
@@ -102,6 +103,7 @@ const { state: { cart }, dispatch } = useStateValue();
     const total_price = products.reduce((sum, p) => sum + p.total_price, 0);
 
     try {
+      // Create order in the database
       await createOrder({
         variables: {
           customer_name: customerName,
