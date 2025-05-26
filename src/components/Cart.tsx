@@ -15,7 +15,7 @@ interface Product {
   color?: string | null;
   capacity?: string | null;
   ports?: string | null;
-  touchIdKeyboard?: string | null;
+  touchIDInKeyboard?: string | null;
   attributes?: Attribute[];
 }
 
@@ -33,6 +33,9 @@ interface AttributeItem {
 
 const Cart: React.FC = () => {
 const { state: { cart }, dispatch } = useStateValue();
+
+console.log(cart);
+
 
   const [createOrder] = useMutation(createOrderMutation);
 
@@ -52,7 +55,7 @@ const { state: { cart }, dispatch } = useStateValue();
         color: item?.color ?? '',
         capacity: item?.capacity ?? '',
         ports: item?.ports ?? '',
-        touchIdKeyboard: item?.touchIdKeyboard ?? '',
+        touchIDInKeyboard: item?.touchIDInKeyboard ?? '',
         attributes: item?.attributes ?? [],
         quantity: item?.quantity + 1,
       });
@@ -69,7 +72,7 @@ const { state: { cart }, dispatch } = useStateValue();
             color: item?.color ?? '',
             capacity: item?.capacity ?? '',
             ports: item?.ports ?? '',
-            touchIdKeyboard: item?.touchIdKeyboard ?? '',
+            touchIDInKeyboard: item?.touchIDInKeyboard ?? '',
             attributes: item?.attributes ?? [],
             quantity: item?.quantity - 1,
         });
@@ -81,7 +84,7 @@ const { state: { cart }, dispatch } = useStateValue();
 
 
   const handleSelected = (itemValue: string, product: Product) => {
-    return [product.size, product.color, product.capacity, product.ports, product.touchIdKeyboard].includes(itemValue);
+    return [product.size, product.color, product.capacity, product.ports, product.touchIDInKeyboard].includes(itemValue);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -96,7 +99,7 @@ const { state: { cart }, dispatch } = useStateValue();
         color: product.color,
         capacity: product.capacity,
         ports: product.ports,
-        touch_id_Keyboard: product.touchIdKeyboard,
+        touch_id_Keyboard: product.touchIDInKeyboard,
       }),
     }));
 
@@ -128,10 +131,13 @@ const { state: { cart }, dispatch } = useStateValue();
 
   const totalPrice = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
+  // Total items count
+  const itemsNumber = cart.reduce((total, item) => total + item.quantity, 0);
+
   return (
     <div className="bg-white shadow-lg p-4 fixed top-20 w-80 right-0 max-h-[85vh] z-50 flex flex-col" data-testid="cart-overlay">
       <h2 className="mb-4">
-        <span className='text-xl font-bold'>My Bag:</span> {cart.length} {cart.length === 1 ? 'item' : 'items'}
+        <span className='text-xl font-bold'>My Bag:</span> {itemsNumber} {itemsNumber === 1 ? 'item' : 'items'}
       </h2>
 
       {cart.length === 0 ? (
@@ -155,6 +161,22 @@ const { state: { cart }, dispatch } = useStateValue();
                             style={{ backgroundColor: item.value }}
                             data-testid={`cart-item-attribute-${toKebabCase(attr.name)}-${item.value}${handleSelected(item.value, product) ? '-selected' : ''}`}
                           />
+                        ) : attr.name === 'With USB 3 ports' ? (
+                          <button
+                            key={item.id}
+                            className={`h-5 w-7 mr-2 p-0 border-2 text-[10px] ${product.ports === item.value ? 'bg-black text-white' : 'bg-white text-black'}`}
+                            data-testid={`product-attribute-${toKebabCase(attr.name)}-${item.value}${handleSelected(item.value, product) ? '-selected' : ''}`}
+                          >
+                            {item.value}
+                          </button>
+                        ) : attr.name === 'Touch ID in keyboard' ? (
+                          <button
+                            key={item.id}
+                            className={`h-5 w-7 mr-2 p-0 border-2 text-[10px] ${product.touchIDInKeyboard === item.value ? 'bg-black text-white' : 'bg-white text-black'}`}
+                            data-testid={`product-attribute-${toKebabCase(attr.name)}-${item.value}${handleSelected(item.value, product) ? '-selected' : ''}`}
+                          >
+                            {item.value}
+                          </button>
                         ) : (
                           <button
                             key={item.id}
@@ -187,7 +209,7 @@ const { state: { cart }, dispatch } = useStateValue();
         <span className="total-amount">${totalPrice.toFixed(2)}</span>
       </div>
 
-      <button onClick={() => setShowOrderForm(!showOrderForm)} className={`w-full bg-green-400 text-white py-2 rounded ${cart.length < 1 ? 'disabled' : ''} cursor-pointer`}>Order</button>
+      <button onClick={() => setShowOrderForm(!showOrderForm)} className={`w-full bg-green-400 text-white py-2 rounded ${cart.length < 1 ? 'disabled' : ''} cursor-pointer`}>PLACE ORDER</button>
 
       {showOrderForm && (
         <form onSubmit={handleSubmit} className="mt-4">

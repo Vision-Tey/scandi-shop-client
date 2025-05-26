@@ -13,4 +13,7 @@
     cursor: not-allowed;
     pointer-events: none;
   }
-  
+
+  body {
+    font-family: 'Raleway', sans-serif;
+  }

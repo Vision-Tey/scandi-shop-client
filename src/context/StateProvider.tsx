@@ -33,7 +33,7 @@ export type Action =
       size: any;
       capacity: any;
       ports: any;
-      touchIdKeyboard: any;
+      touchIDInKeyboard: any;
       attributes: any;
       color: any;
       quantity: number;

@@ -22,7 +22,7 @@ import {
     color?: string;
     capacity?: string;
     ports?: string;
-    touchIdKeyboard?: string;
+    touchIDInKeyboard?: string;
     attributes?: any[];
     image?: string;
     description?: string;
@@ -89,7 +89,7 @@ import {
         quantity: number;
         capacity?: string;
         ports?: string;
-        touchIdKeyboard?: string;
+        touchIDInKeyboard?: string;
         attributes?: any[];
       }
     | { type: typeof EMPTY_CART }
@@ -163,7 +163,7 @@ import {
             item.color === action.color &&
             item.capacity === action.capacity &&
             item.ports === action.ports &&
-            item.touchIdKeyboard === action.touchIdKeyboard &&
+            item.touchIDInKeyboard === action.touchIDInKeyboard &&
             item.attributes === action.attributes
               ? { ...item, quantity: action.quantity }
               : item

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { BsCart2 } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
 import { useStateValue } from '../context/StateProvider'; // Assuming you're using useContext for global state
-import { ADD_TO_CART, SET_CATEGORIES, SET_PRODUCTS, UPDATE_CART_ITEM } from '../constants/constants';
+import { ADD_TO_CART, SET_CATEGORIES, SET_PRODUCTS, TOGGLE_CART, UPDATE_CART_ITEM } from '../constants/constants';
 import fetchProducts from '../api/index';
 import { allProducts as AllProducts } from '../api/graphqlQueries';
 import { toKebabCase } from '../utils/utils';
@@ -131,9 +131,12 @@ const HomePage: React.FC = () => {
         size: defaultAttributes.size,
         capacity: defaultAttributes.capacity,
         ports: defaultAttributes.ports,
-        touchIdKeyboard: defaultAttributes.touchIDInKeyboard,
+        touchIDInKeyboard: defaultAttributes.touchIDInKeyboard,
         attributes: item.attributes,
         quantity: item.quantity + 1,
+      });
+      dispatch({
+        type: TOGGLE_CART,
       });
     } else {
       // Add the item as a new entry in the cart
@@ -151,10 +154,13 @@ const HomePage: React.FC = () => {
           size: defaultAttributes.size ?? '',
           capacity: defaultAttributes.capacity ?? '',
           ports: defaultAttributes.ports ?? '',
-          touchIdKeyboard: defaultAttributes.touchIDInKeyboard ?? '',
+          touchIDInKeyboard: defaultAttributes.touchIDInKeyboard ?? '',
           attributes : attributes ?? [],
           quantity: 1,
         },
+      });
+      dispatch({
+        type: TOGGLE_CART,
       });
     }
   };
