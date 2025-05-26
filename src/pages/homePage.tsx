@@ -9,30 +9,30 @@ import { toKebabCase } from '../utils/utils';
 import Heading from '../components/Heading';
 
 interface Product {
-    id: string;
+  id: string;
+  name: string;
+  description: string;
+  category: string;
+  gallery: string[];
+  prices: { amount: number; currency: string }[];
+  inStock: boolean;
+  attributes: {
     name: string;
-    description: string;
-    category: string;
-    gallery: string[];
-    prices: { amount: number; currency: string }[];
-    inStock: boolean;
-    attributes: {
-      name: string;
-      items: { value: string }[];
-    }[];
-  }
-  
-  interface Category {
-    name: string;
-  }
-  
-  interface AllProductsResponse {
-    data: {
-      products: Product[];
-      categories: Category[];
-    };
-  }
-  
+    items: { value: string }[];
+  }[];
+}
+
+interface Category {
+  name: string;
+}
+
+interface AllProductsResponse {
+  data: {
+    products: Product[];
+    categories: Category[];
+  };
+}
+
 
 const HomePage: React.FC = () => {
   const { state, dispatch } = useStateValue(); // Accessing global state and dispatch via context
@@ -155,7 +155,7 @@ const HomePage: React.FC = () => {
           capacity: defaultAttributes.capacity ?? '',
           ports: defaultAttributes.ports ?? '',
           touchIDInKeyboard: defaultAttributes.touchIDInKeyboard ?? '',
-          attributes : attributes ?? [],
+          attributes: attributes ?? [],
           quantity: 1,
         },
       });
@@ -177,8 +177,9 @@ const HomePage: React.FC = () => {
         {filteredProducts?.map(product => (
           <div
             key={product.id}
-            className="relative block w-72 rounded-lg overflow-hidden shadow-lg group"
+            className="relative block w-72 rounded-lg overflow-hidden shadow-lg group cursor-pointer"
             data-testid={`product-${toKebabCase(product.name)}`}
+            onClick={() => navigate(`/product/${product.id}`)} // ⬅️ Navigate on click
           >
             <img
               className={`rounded-t-lg w-full h-48 object-cover ${product.inStock === false ? 'out-of-stock' : ''}`}
@@ -190,7 +191,10 @@ const HomePage: React.FC = () => {
                 <span className="text-2xl text-gray-500">OUT OF STOCK</span>
               </div>
             ) : (
-              <div className="absolute top-44 right-6 opacity-0 group-hover:opacity-100 transition-opacity">
+              <div
+                className="absolute top-44 right-6 opacity-0 group-hover:opacity-100 transition-opacity"
+                onClick={(e) => e.stopPropagation()} // ⬅️ Prevent card navigation when clicking cart
+              >
                 <button
                   onClick={() =>
                     addToCart(
@@ -211,13 +215,12 @@ const HomePage: React.FC = () => {
               </div>
             )}
             <div className="p-2">
-              <a onClick={() => navigate(`/product/${product.id}`)}>
-                <h5 className="text-sm mb-2 cursor-pointer">{product.name}</h5>
-              </a>
+              <h5 className="text-sm mb-2">{product.name}</h5>
               <p className="text-l font-medium">${product.prices[0].amount}</p>
             </div>
           </div>
         ))}
+
       </div>
     </div>
   );
