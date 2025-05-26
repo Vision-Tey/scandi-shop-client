@@ -40,7 +40,7 @@ const { cart, showCart, categories, active } = state;
                 className="px-3 py-2 flex flex-col rounded-md cursor-pointer"
               >
                 <a
-                  className='uppercase'
+                  className={`uppercase ${active === category.name ? 'text-green-500 ' : 'text-gray-700 hover:text-green-500'}`}
                   data-testid={active === category.name ? 'active-category-link' : 'category-link'}
                   href={`/${category.name}`}
                   onClick={(e) => handleLinkClick(e, category.name)}
