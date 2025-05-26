@@ -179,7 +179,7 @@ const HomePage: React.FC = () => {
             key={product.id}
             className="relative block w-72 rounded-lg overflow-hidden shadow-lg group cursor-pointer"
             data-testid={`product-${toKebabCase(product.name)}`}
-            onClick={() => navigate(`/product/${product.id}`)} // ⬅️ Navigate on click
+            onClick={() => navigate(`/product/${product.id}`)} 
           >
             <img
               className={`rounded-t-lg w-full h-48 object-cover ${product.inStock === false ? 'out-of-stock' : ''}`}

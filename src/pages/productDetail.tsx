@@ -86,7 +86,7 @@ const ProductDetails: React.FC = () => {
 
     const finalAttributes = getFinalAttributes();
 
-    // Map verbose attribute names to short, consistent keys
+    // Map attribute names to short, consistent keys
     const attributeKeyMap: { [key: string]: string } = {
       "color": "color",
       "size": "size",
