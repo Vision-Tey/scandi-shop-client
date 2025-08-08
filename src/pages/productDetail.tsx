@@ -172,18 +172,34 @@ const ProductDetails: React.FC = () => {
     }
   };
 
-  const renderDescription = (html: string) => {
-    const paragraphRegex = /<p>(.*?)<\/p>/g;
-    const parts = [];
-    let match;
-    let index = 0;
+  // const renderDescription = (html: string) => {
+  //   const paragraphRegex = /<p>(.*?)<\/p>/g;
+  //   const parts = [];
+  //   let match;
+  //   let index = 0;
 
-    while ((match = paragraphRegex.exec(html)) !== null) {
-      parts.push(<p key={index++} className="my-2">{match[1]}</p>);
-    }
+  //   while ((match = paragraphRegex.exec(html)) !== null) {
+  //     parts.push(<p key={index++} className="my-2">{match[1]}</p>);
+  //   }
 
-    return parts;
-  };
+  //   return parts;
+  // };
+
+const renderDescription = (desc: string) => {
+  // If <p> tags exist, extract and render each as a paragraph
+  const paragraphRegex = /<p>(.*?)<\/p>/gi;
+  const matches = [...desc.matchAll(paragraphRegex)];
+
+  if (matches.length > 0) {
+    return matches.map((m, i) => (
+      <p key={i} className="my-2">{m[1]}</p>
+    ));
+  }
+
+  // Otherwise, strip all HTML tags and render as plain text
+  const plainText = desc.replace(/<[^>]+>/g, '');
+  return <p className="my-2">{plainText}</p>;
+};
 
   const handlePrev = () => {
     if (!productData) return;
@@ -200,6 +216,9 @@ const ProductDetails: React.FC = () => {
       setSelectedImage(productData.gallery[currentIndex + 1]);
     }
   };
+
+  console.log(productData?.description);
+
 
   if (!productData) return <div>Loading...</div>;
 
@@ -305,6 +324,8 @@ const ProductDetails: React.FC = () => {
 
                 <div className="mt-4" data-testid="product-description">
                   {renderDescription(productData.description)}
+
+
                 </div>
 
               </div>
